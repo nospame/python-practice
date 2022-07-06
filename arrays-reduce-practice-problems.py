@@ -1,4 +1,5 @@
 from functools import reduce
+from operator import concat
 
 #  1. Start with an array of numbers and compute the sum of all the numbers.
 #     For example, [5, 10, 8, 3] becomes 26.
@@ -152,10 +153,75 @@ print(product)
 
 #  8. Start with an array of strings and combine them all into a single string, separated by dashes.
 #     For example, ["volleyball", "basketball", "badminton"] becomes "-volleyball-basketball-badminton-".
+strings = ["volleyball", "basketball", "badminton"]
+
+# for loop
+concat_string = ""
+for str in strings:
+    concat_string += str
+    if not str == strings[-1]:
+        concat_string += '-'
+
+print(concat_string)
+
+# join method
+concat_string = '-'.join(strings)
+print(concat_string)
+
+# reduce method
+def concat(a, b):
+    return a + '-' + b
+
+concat_string = reduce(concat, strings)
+print(concat_string)
 
 #  9. Start with an array of hashes and find the hash with the shortest name (from the :name key).
 #     For example, [{name: "chair", price: 100}, {name: "pencil", price: 1}, {name: "book", price: 4}] becomes {name: "book", price: 4}.
+products = [
+    {"name": "chair", "price": 100}, 
+    {"name": "pencil", "price": 1}, 
+    {"name": "book", "price": 4}
+]
+
+# for loop
+shortest_name = products[0]["name"]
+for product in products:
+    if len(product["name"]) < len(shortest_name):
+        shortest_name = product["name"]
+
+print(shortest_name)
+
+# reduce function
+def get_shortest_name(a, b):
+    if len(a) < len(b["name"]):
+        return a
+    return b["name"]
+
+shortest_name = reduce(get_shortest_name, products, products[0]["name"])
+print(shortest_name)
 
 # 10. Start with an array of numbers and compute the maximum number.
 #     For example, [5, 10, 8, 3] becomes 10.
+numbers = [5, 10, 8, 3]
 
+# for loop
+max_num = numbers[0]
+for num in numbers:
+    if num > max_num:
+        max_num = num
+
+print(max_num)
+
+# max function
+max_num = max(numbers)
+
+print(max_num)
+
+# reduce function
+def get_max(a, b):
+    if a > b:
+        return a
+    return b
+
+max_num = reduce(get_max, numbers)
+print(max_num)
