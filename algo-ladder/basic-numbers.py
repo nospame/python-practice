@@ -1,11 +1,35 @@
 # Write a function that returns whether a given number is a prime number.
 
+def is_prime(num):
+    for i in range(2, int(num / 2)):
+        if num % i == 0:
+            return False
+    return True
+
+print(is_prime(2))    # => True
+print(is_prime(48))   # => False
+print(is_prime(4259)) # => True
+print(is_prime(4263)) # => False
+
 
 # Write a function that prints out every number from 1 to N, with the following exceptions:
 
 # If the number is divisible by 3, print out "FIZZ".
 # If the number is divisible by 5, print out "BUZZ".
 # If the number is divisible by both 3 and 5, print out "FIZZBUZZ".
+
+def fizz_buzz(n):
+    for i in range(1, n + 1):
+        if i % 15 == 0:
+            print("FIZZBUZZ")
+        elif i % 5 == 0:
+            print("BUZZ")
+        elif i % 3 == 0:
+            print("FIZZ")
+        else:
+            print(i)
+
+fizz_buzz(30)
 
 
 # Write a function that gives the Nth number of the Fibonacci Sequence. The Fibonacci sequence begins with 0 and 1, and every number thereafter is the sum of the previous two numbers. So the sequence goes like this:
@@ -14,6 +38,16 @@
 
 # Input: 9
 # Output: 21 (as this is the 9th number of the Fibonacci Sequence)
+#     Note: this output is incorrect by most standards, which count n(1) as 1
+#     n(9) would therefore be 34; the function could easily be modified to return the previous number
+
+def fibonacci(n):
+    x, y = 0, 1
+    for i in range(n):
+        x, y = y, x + y
+    return x
+
+print(fibonacci(9))   
 
 
 # Given a year, report if it is a leap year.
@@ -26,6 +60,20 @@
 # For example, 1997 is not a leap year, but 1996 is. 1900 is not a leap year, but 2000 is.
 
 # If your language provides a method in the standard library that does this look-up, pretend it doesn't exist and implement it yourself.
+
+def leap_year(year):
+    if year % 400 == 0:
+        return True
+    elif year % 100 == 0:
+        return False
+    elif year % 4 == 0:
+        return True
+    return False
+
+print(leap_year(1997))  # => False
+print(leap_year(1996))  # => True
+print(leap_year(1900))  # => False
+print(leap_year(2000))  # => True
 
 
 # If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
