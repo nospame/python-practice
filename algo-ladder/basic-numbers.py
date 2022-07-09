@@ -80,6 +80,15 @@ print(leap_year(2000))  # => True
 
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
+def sum_3_5_multiples(n):
+    sum = 0
+    for i in range(n):
+        if i % 3 == 0 or i % 5 == 0:
+            sum += i
+    return sum
+
+print(sum_3_5_multiples(1000))
+
 
 # The Collatz Conjecture or 3x+1 problem can be summarized as follows:
 
@@ -103,7 +112,39 @@ print(leap_year(2000))  # => True
 
 # Resulting in 9 steps. So for input n = 12, the return value would be 9.
 
+def collatz(n):
+    count = 0
+    while n > 1:
+        if n % 2 == 0:
+            n /= 2
+        else:
+            n = n * 3 + 1
+        count += 1
+    return count
+
+print(collatz(12))
+
 
 # A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 
 # Find the largest palindrome made from the product of two 3-digit numbers.
+def is_palindrome(num):
+    num_str = str(num)
+    for i in range(int(len(num_str) / 2)):
+        if num_str[i] != num_str[-(i + 1)]:
+            return False
+    return True
+
+def largest_palindrome(n):
+    max = int('1' + '0' * n)
+    large_palindrome = 0
+    for i in reversed(range(1, max)):
+        for j in reversed(range(1, max)):
+            if is_palindrome(i * j):
+                if i * j > large_palindrome:
+                    large_palindrome = i * j 
+                break
+    return large_palindrome
+
+print(is_palindrome(334))
+print(largest_palindrome(3))
